@@ -2,20 +2,20 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from database import db
 from models import Server, Metric, Alert
-import datetime
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-# ✅ UPDATE this with your actual password later
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:05022004@localhost/server_monitoring'
+# ✅ Use environment variable for database URL
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///fallback.db')  # fallback for local testing
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
 @app.route("/")
 def home():
-    return {"status": "API is running"}
+    return {"status": "API is running ✅"}
 
 @app.route("/servers")
 def get_servers():
@@ -48,5 +48,6 @@ def get_alerts():
         counts[a.severity] += 1
     return jsonify(counts)
 
+# ✅ Required for Render deployment
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
