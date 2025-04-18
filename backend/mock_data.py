@@ -1,37 +1,34 @@
-from main import app, db
+# mock_data.py
+
 from models import Server, Metric, Alert
-from datetime import datetime, timedelta
+from database import db
 from faker import Faker
 import random
+from datetime import datetime, timedelta
 
 fake = Faker()
 
-with app.app_context():
-    # 🧼 Clean slate
-    db.drop_all()
-    db.create_all()
+def populate_mock_data():
+    print("🛠️  Inserting mock data...")
 
-    # 🌐 Server seeding
-    tag_options = ['Web Server', 'Desky', 'Software', 'Database', 'API Gateway']
-    provider_options = ['Indioserver', 'Jenriorde', 'Walikarsi', 'CloudSpark', 'NodeFusion']
-
+    # Insert Servers
     servers = []
-    for _ in range(5):  # 5 random servers
+    for _ in range(5):
         server = Server(
             name=fake.name(),
             ip_address=fake.ipv4_private(),
             created=f"{random.randint(1, 12)} months ago",
-            tag=random.choice(tag_options),
-            provider=random.choice(provider_options)
+            tag=random.choice(['Web Server', 'Desky', 'Software', 'Database', 'API Gateway']),
+            provider=random.choice(['Indioserver', 'Jenriorde', 'Walikarsi', 'CloudSpark', 'NodeFusion'])
         )
         db.session.add(server)
         servers.append(server)
 
     db.session.commit()
 
-    # 📈 Metrics per server
+    # Insert Metrics
     for server in servers:
-        for i in range(20):  # 20 metrics per server
+        for i in range(12):
             metric = Metric(
                 server_id=server.id,
                 cpu=round(random.uniform(10, 95), 2),
@@ -42,18 +39,14 @@ with app.app_context():
             )
             db.session.add(metric)
 
-    # 🚨 Alerts seeding
-    alert_severities = ['critical', 'medium', 'low']
-    alert_count = 10  # You can increase this if needed
-
-    for _ in range(alert_count):
+    # Insert Alerts
+    for _ in range(10):
         alert = Alert(
-            severity=random.choice(alert_severities),
+            severity=random.choice(['critical', 'medium', 'low']),
             message=fake.sentence(nb_words=6),
             server_id=random.choice(servers).id
         )
         db.session.add(alert)
-        print(f"[+] Alert seeded: {alert.severity.upper()} - {alert.message}")
 
     db.session.commit()
     print("✅ Random mock data inserted.")
