@@ -9,7 +9,7 @@ const ServerTable = () => {
   const tagOptions = ['All', 'Web Server', 'Desky', 'Software', 'Database', 'API Gateway'];
 
   useEffect(() => {
-    axios.get('http://localhost:5000/servers')
+    axios.get('https://server-dashboard-xjnc.onrender.com/servers')
       .then(res => setServers(res.data))
       .catch(err => console.error("Error fetching servers:", err));
   }, []);

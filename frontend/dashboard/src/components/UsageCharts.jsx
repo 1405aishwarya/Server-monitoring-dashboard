@@ -19,7 +19,7 @@ const UsageCharts = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/metrics')
+    axios.get('https://server-dashboard-xjnc.onrender.com/metrics')
       .then(res => {
         const last10 = res.data.slice(-10); // ✨ show only last 10 points
         setData(last10);

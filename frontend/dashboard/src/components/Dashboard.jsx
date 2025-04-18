@@ -5,7 +5,7 @@ const Alerts = () => {
     const [alerts, setAlerts] = useState({ critical: 0, medium: 0, low: 0 });
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/alerts')
+        axios.get('https://server-dashboard-xjnc.onrender.com/alerts')
             .then(response => setAlerts(response.data))
             .catch(error => console.error(error));
     }, []);

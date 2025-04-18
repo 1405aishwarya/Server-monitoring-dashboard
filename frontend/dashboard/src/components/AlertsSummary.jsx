@@ -6,7 +6,7 @@ const AlertsSummary = () => {
   const [alertCounts, setAlertCounts] = useState({ critical: 0, medium: 0, low: 0 });
 
   useEffect(() => {
-    axios.get('http://localhost:5000/alerts')
+    axios.get('https://server-dashboard-xjnc.onrender.com/alerts')
       .then(res => {
         console.log('✅ Alert counts from API:', res.data); // Debug
         setAlertCounts(res.data); // ✅ Use counts directly
