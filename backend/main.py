@@ -51,4 +51,10 @@ def get_alerts():
 
 # ✅ Required for Render deployment
 if __name__ == "__main__":
+    from mock_data import populate_mock_data  # Import mock data function
+    with app.app_context():
+        db.create_all()           # Creates all tables
+        populate_mock_data()      # Populates with fake/mock data
+
     app.run(host="0.0.0.0", port=10000)
+
