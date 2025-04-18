@@ -7,8 +7,9 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# ✅ Use environment variable for database URL
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///fallback.db')  # fallback for local testing
+# ✅ Use environment variable for database URL  
+# fallback for local testing
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://serverdashboarddb:Gcrp9Se5lJHaJKdRjYMHk9arEtUSp7nW@dpg-d00qmma4d50c73cjau50-a/serverdashboard'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
