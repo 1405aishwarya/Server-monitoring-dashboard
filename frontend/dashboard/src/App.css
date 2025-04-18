@@ -29,27 +29,13 @@ body {
   min-width: 280px;
 }
 
+/* Card styling */
 .card {
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  width: 100%;
-}
-
-.section-heading {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-/* Existing styles ... */
-
-.card {
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease; /* ✅ Smooth hover animation */
+  transition: all 0.3s ease; /* Smooth hover animation */
   width: 100%;
 }
 
@@ -58,6 +44,7 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* Section headings */
 .section-heading {
   font-size: 1.25rem;
   margin-bottom: 1rem;
@@ -67,3 +54,36 @@ body {
   color: #2d3436;
 }
 
+/* ✅ Table styling fix */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  color: #2d3436; /* Dark readable text */
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  background-color: #f0f0f0;
+  color: #333333;
+  font-weight: 600;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Optional: Search input and dropdown filter styling */
+input[type="text"], select {
+  padding: 8px 12px;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
